@@ -13,16 +13,12 @@
   entry: ruby.py
   language: script
   files: \.(rb|rake)$
-- id: restrict_methods_on_reservation_table
-  name: Only allow limited methods on the Reservation model in parsing
-  entry: \bReservation\s*\.(?!(mass|calendar|hotel_pms_res|set_canceled|update_from)).*
-  language: pygrep
-  files: \.rb$
 - id: no_commas_in_string_arrays
   name: Do not forget a comma in a %w() string array
   entry: \%w\([^)]*,[^)]*\)
   language: pygrep
   files: \.(rb|rake)$
+  args: [--multiline]
 - id: check_rails_env_with_methods
   name: Do not write "Rails.env =" to avoid assignment
   entry: Rails\.env\s*=
@@ -43,11 +39,13 @@
   entry: \A(?!(require\s\'rails_helper\')).*
   language: pygrep
   files: spec\.rb$
+  args: [--multiline]
 - id: no_puts_statements
   name: Do not leave puts statements in production code
   entry: "[.\\s]?puts[(\\s]?.*"
   language: pygrep
   files: \.rb$
+  args: [--multiline]
 - id: remove_ipython_notebook_outputs
   name: Remove ipython notebook outputs
   entry: strip_ipynb.sh
